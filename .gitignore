@@ -5,6 +5,13 @@
 *.tfstate
 *.tfstate.*
 
+# remove out file
+*.out
+*.out*
+*_Deepika.txt*
+
+.DS_Store
+
 # Crash log files
 crash.log
 crash.*.log
