@@ -9,6 +9,7 @@ phases:
   install:
     on-failure: ABORT
     commands:
+      - cd /tmp
       - echo "Installing Terraform"
       - echo "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
       - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
