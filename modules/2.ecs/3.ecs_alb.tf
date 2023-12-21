@@ -5,8 +5,8 @@ resource "aws_alb" "ecs_fargate_cluster_alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_for_ecs_sg.id]
   #subnets            = [data.aws_subnet.public_subnet_1_cidr.id, data.aws_subnet.public_subnet_2_cidr.id]
-  #subnets =  ["${join(",",var.alb_public_subnets)}"]
-  subnets = []
+  subnets = var.alb_public_subnets
+  #subnets = "${var.alb_public_subnets}"
 
   tags = {
     Name = "${var.env}_ecs_fargate_cluster_alb"
@@ -25,8 +25,15 @@ resource "aws_security_group" "alb_for_ecs_sg" {
   ingress { #  allow incoming traffic 
     from_port   = 80
     to_port     = 80
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # allow traffic in from all sources through 80 port
+  }
+
+  ingress { #  allow incoming traffic 
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # allow traffic in from all sources through 80 port
   }
   egress { # allow outgoing traffic
     from_port   = 0
@@ -36,9 +43,10 @@ resource "aws_security_group" "alb_for_ecs_sg" {
   }
 }
 
+# Target group created for targets (ECS cluster to load balance between tasks)
 resource "aws_alb_target_group" "alb_target_group" {
   name        = "${var.env}-alb-tg"
-  port        = "80"
+  port        = "80"  
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id

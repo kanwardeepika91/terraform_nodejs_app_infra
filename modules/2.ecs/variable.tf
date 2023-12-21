@@ -10,10 +10,41 @@ variable "vpc_id" {
 }
 
 
-variable "container_port" {
-}
 
 variable "alb_public_subnets" {
+  type = list(any)
+}
+
+
+variable "fargate_memory" {
+  type = number
+}
+
+variable "fargate_cpu" {
+  type = number
+}
+
+variable "containerPort" { 
+type = number
+}
+
+variable "hostPort" { 
+type = number
+}
+
+variable "container_memory" {
+  type = number
+}
+
+variable "container_cpu" {
+  type = number
+}
+
+
+
+variable "app_count" { 
+  type = number
+  default = 1 
 }
 
 

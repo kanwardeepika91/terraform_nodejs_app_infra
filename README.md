@@ -29,3 +29,10 @@ terraform init -backend-config="key={ENV}_${USER}/terraform.tfstate" or
 6. terraform destroy -var-file=dev_ecs_infra_terraform.tfvars
 
 
+ERRROS:
+ solution: changed to 6789 for both ports
+ Error: creating ECS Task Definition (dev-ecs-app-task): ClientException: When networkMode=awsvpc, the host ports and container ports in port mappings must match.
+
+solution : pass subnet ids properly as its taking CIDR block value --InvalidSubnet: The subnet ID '172.31.0.0/20' is not valid
+ │ Error: creating ELBv2 application Load Balancer (dev-ecs-alb): InvalidSubnet: The subnet ID '172.31.0.0/20' is not valid
+│       status code: 400, request id: 8db13b75-5212-493b-af90-ea12e0b26811

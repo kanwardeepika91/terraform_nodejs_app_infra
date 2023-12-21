@@ -10,6 +10,22 @@ variable "vpc_cidr" {
   description = "vpc cidr block range value will be passed as tfvars"
 }
 
-variable "container_port" {
+variable "containerPort" { }
 
+variable "hostPort" { }
+
+variable "fargate_memory" {
+  type = number
+}
+
+variable "fargate_cpu" {
+  type = number
+}
+
+variable "container_memory" {
+  type = number
+}
+
+variable "container_cpu" {
+  type = number
 }

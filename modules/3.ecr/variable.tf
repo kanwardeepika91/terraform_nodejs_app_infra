@@ -4,5 +4,6 @@ variable "region" {
 }
 
 variable "env" {
-  default = "dev_ecs"
+  default = "dev-ecs"
 }
+

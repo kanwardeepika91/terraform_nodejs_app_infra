@@ -12,15 +12,16 @@ resource "aws_vpc" "myvpc" {
 #Public subnets creation in two AZ
 resource "aws_subnet" "public_subnet_1_cidr" {
   vpc_id            = aws_vpc.myvpc.id
-  cidr_block        = local.subnets[1]
+  cidr_block        = local.subnets[0]
   availability_zone = local.az1
+  map_public_ip_on_launch = true
   tags = {
     Name = "${var.env}-public_subnet_1"
   }
 }
 resource "aws_subnet" "public_subnet_2_cidr" {
   vpc_id            = aws_vpc.myvpc.id
-  cidr_block        = local.subnets[2]
+  cidr_block        = local.subnets[1]
   availability_zone = local.az2
   tags = {
     Name = "${var.env}-public_subnet_2"
@@ -30,15 +31,16 @@ resource "aws_subnet" "public_subnet_2_cidr" {
 #Private subnets creation in two AZ
 resource "aws_subnet" "private_subnet_1_cidr" {
   vpc_id            = aws_vpc.myvpc.id
-  cidr_block        = local.subnets[3]
+  cidr_block        = local.subnets[2]
   availability_zone = local.az1 # automate if have time
+  map_public_ip_on_launch = true
   tags = {
     Name = "${var.env}-private_subnet_1"
   }
 }
 resource "aws_subnet" "private_subnet_2_cidr" {
   vpc_id            = aws_vpc.myvpc.id
-  cidr_block        = local.subnets[4]
+  cidr_block        = local.subnets[3]
   availability_zone = local.az2 # automate if have time
   tags = {
     Name = "${var.env}-private_subnet_2"
@@ -116,6 +118,5 @@ resource "aws_nat_gateway" "nat_gw" {
 resource "aws_route" "nat_gw_routing" {
   route_table_id = aws_route_table.private_route_table.id
   nat_gateway_id = aws_nat_gateway.nat_gw.id
-  # allow out traffic from instance to internet or IG
-  destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = "0.0.0.0/0"  # allow out traffic from instance to internet or IG
 }
