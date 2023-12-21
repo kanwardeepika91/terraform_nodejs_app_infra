@@ -21,7 +21,7 @@ phases:
     commands:
       - echo "Terraform Init"
       - terraform init
-      - echo ""Terraform validate"
+      - echo "Terraform validate"
       - terraform validate
     
   build:
