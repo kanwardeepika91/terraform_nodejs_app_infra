@@ -15,23 +15,24 @@ phases:
       - unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && sudo mv terraform /usr/local/bin
       - terraform --version
       - cd -
+      - cd terraform
 
   pre_build:
     commands:
       - echo "Terraform Init"
-      - terraform -chdir=./terraform_nodejs_app_infra init 
+      - terraform init
       - echo ""Terraform validate"
-      - terraform -chdir=./terraform_nodejs_app_infra validate
+      - terraform validate
     
   build:
     commands:
       - |
         if [ "$TERRAFORM_ACTION" = "apply" ]; then
           echo "Terraform Apply"
-          terraform -chdir=./terraform_nodejs_app_infra apply -auto-approve -var-file=dev_ecs_infra_terraform.tfvars
+          terraform apply -auto-approve -var-file=dev_ecs_infra_terraform.tfvars
         elif [ "$TERRAFORM_ACTION" = "destroy" ]; then
           echo "Terraform Destroy"
-          terraform -chdir=./terraform_nodejs_app_infra destroy -var-file=dev_ecs_infra_terraform.tfvars
+          terraform destroy -var-file=dev_ecs_infra_terraform.tfvars
         else
           echo "No Terraform action specified."
         fi  
