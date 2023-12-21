@@ -12,10 +12,10 @@ or export the access and secret key
     export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 ### Work Flow Execution to create ECS cluster : Infra steps 
-Create VPC
-Create ECR
-Create ECS cluster
-Create Fargate service 
+1. Create VPC
+2. Create ECR
+3. Create ECS cluster
+4. Create Fargate service 
 
 
 ### Terraform command exection commands
