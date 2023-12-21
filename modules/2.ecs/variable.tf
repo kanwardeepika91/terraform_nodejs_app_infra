@@ -45,4 +45,7 @@ variable "container_app_count" {
   default = 2
 }
 
+variable "private_subnets" {
+  
+}
 
