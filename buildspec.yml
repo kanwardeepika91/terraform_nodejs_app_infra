@@ -1,0 +1,40 @@
+version: 0.2
+env: 
+  shell: bash
+  variables:
+   # TERRAFORM_ACTION: "apply"  # supply this via aws codebuild env variables
+    TERRAFORM_VERSION: 1.5.7
+    
+phases:
+  install:
+    on-failure: ABORT
+    commands:
+      - cd /tmp
+      - echo "Installing Terraform"
+      - echo "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+      - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      - unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && sudo mv terraform /usr/local/bin
+      - terraform --version
+      - cd -
+
+  pre_build:
+    commands:
+      - echo "Terraform Init"
+      - terraform init
+      - echo "Terraform validate"
+      - terraform validate
+    
+  build:
+    commands:
+      - |
+        if [ "$TERRAFORM_ACTION" = "apply" ]; then
+          echo "Terraform Apply"
+          terraform apply -auto-approve -var-file=dev_ecs_infra_terraform.tfvars
+        elif [ "$TERRAFORM_ACTION" = "destroy" ]; then
+          echo "Terraform Destroy"
+          terraform destroy -var-file=dev_ecs_infra_terraform.tfvars
+        else
+          echo "No Terraform action specified."
+        fi  
+
+

@@ -21,7 +21,6 @@ output "private_subnet_id_2" {
   value = aws_subnet.private_subnet_2_cidr.id
 } 
 
-output "public_sn" {
-  value = local.public_sn
-  
+output "private_sn" {
+  value = local.private_sn
 }

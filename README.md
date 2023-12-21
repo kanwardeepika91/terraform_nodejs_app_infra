@@ -7,7 +7,7 @@ Install AWS CLI - https://formulae.brew.sh/formula/awscli
 1. Create a user in IAM User and have programatic access
 2. Configure credentials: type 
 in CLI type the command: aws configure
-or export the access and secret key 
+or export the access and secret key  (have admin access or IAM role should have admin access to create Infrastructure )
     export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
     export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 

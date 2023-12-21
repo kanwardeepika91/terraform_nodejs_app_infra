@@ -99,7 +99,7 @@ resource "aws_route" "Igw_routing" {
 
 resource "aws_eip" "elastic_ip_for_nat_gateway" {
   domain                    = "vpc"
-  associate_with_private_ip = "10.0.0.5" # automate when you have time
+  #associate_with_private_ip = "10.0.0.5" # automate when you have time
   tags = {
     Name = "${var.env}-eip"
   }
