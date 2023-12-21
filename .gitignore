@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 
+# terraform lock file
+.terraform.lock.hcl
 # remove out file
 *.out
 *.out*
