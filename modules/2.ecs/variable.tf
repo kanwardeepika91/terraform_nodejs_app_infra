@@ -40,11 +40,9 @@ variable "container_cpu" {
   type = number
 }
 
-
-
-variable "app_count" { 
+variable "container_app_count" { 
   type = number
-  default = 1 
+  default = 2
 }
 
 

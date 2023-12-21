@@ -29,3 +29,7 @@ variable "container_memory" {
 variable "container_cpu" {
   type = number
 }
+
+variable "container_app_count" {
+ type = number 
+}

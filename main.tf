@@ -15,4 +15,5 @@ module "ecs" {
   fargate_cpu = var.fargate_cpu
   container_cpu = var.container_cpu
   container_memory = var.container_memory
+  container_app_count = var.container_app_count
 } 
