@@ -6,8 +6,9 @@ env:
     TERRAFORM_VERSION: 1.5.7
     
 phases:
-  on-failure: ABORT
-  commands:
+  install:
+    on-failure: ABORT
+    commands:
       - echo "Installing Terraform"
       - echo "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
       - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
