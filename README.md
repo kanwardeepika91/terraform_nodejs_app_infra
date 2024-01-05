@@ -1,3 +1,11 @@
+### Details about this Terraform project code: 
+```
+This Terraform Code is created for a Dockerized application : https://github.com/kanwardeepika91/vue-js-node-js-express-mysql.git
+```
+1. The Application infrastructure of above git project is mainly to host the application on AWS ECS Fargate
+2. docker-compose is been used for application + mysql and automated deployment using AWS Codepipeline *(Documentation is in progress))*
+3. NOTE: You can also create a seperate container for Mysql and create a AWS RDS to host mysql.
+
 ### Installations:
 on Mac:
 Install terraform - https://formulae.brew.sh/formula/terraform
@@ -29,10 +37,17 @@ terraform init -backend-config="key={ENV}_${USER}/terraform.tfstate" or
 6. terraform destroy -var-file=dev_ecs_infra_terraform.tfvars
 
 
-ERRROS:
- solution: changed to 6789 for both ports
- Error: creating ECS Task Definition (dev-ecs-app-task): ClientException: When networkMode=awsvpc, the host ports and container ports in port mappings must match.
+ERRROS: faced during code testing
+ 
+```
+ Error1: creating ECS Task Definition (dev-ecs-app-task):
+  ClientException: When networkMode=awsvpc, the host ports and container ports in port mappings must match.
+ Solution: changed to 6789 for both ports 
+```
 
-solution : pass subnet ids properly as its taking CIDR block value --InvalidSubnet: The subnet ID '172.31.0.0/20' is not valid
+```
+Error2: --InvalidSubnet: The subnet ID '172.31.0.0/20' is not valid
  │ Error: creating ELBv2 application Load Balancer (dev-ecs-alb): InvalidSubnet: The subnet ID '172.31.0.0/20' is not valid
 │       status code: 400, request id: 8db13b75-5212-493b-af90-ea12e0b26811
+Solution: pass subnet ids properly as its taking CIDR block value 
+```
