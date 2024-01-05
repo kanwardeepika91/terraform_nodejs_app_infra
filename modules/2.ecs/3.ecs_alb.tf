@@ -13,7 +13,7 @@ resource "aws_alb" "ecs_fargate_cluster_alb" {
   }
 }
 
-# security group to route traffic frm ALB to ECS
+# security group to route traffic frm IG to Load balancer
 resource "aws_security_group" "alb_for_ecs_sg" {
   name        = "${var.env}_alb_sg"
   vpc_id      = var.vpc_id

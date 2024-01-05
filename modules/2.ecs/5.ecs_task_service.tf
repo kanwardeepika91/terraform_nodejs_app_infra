@@ -14,7 +14,7 @@ resource "aws_ecs_service" "app_service" {
 
   network_configuration {
     subnets          = var.private_subnets
-    assign_public_ip = true     # Provide the containers with public IPs
+    assign_public_ip = false    # mark true if you want to Provide the containers with public IPs
     security_groups  = [aws_security_group.ecs_tasks_sg.id] # Set up the security group
   }
 }
